@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  Каталог - Flower Shop
+{% endblock %}
+
+{% block content %}
+	<section id="catalog">
+		<div class="container p100">
+			<div class="catalog">
+				<div class="title">Все букеты</div>
+				<div class="catalog__block">
+					<div class="recommended__elems ficb">
+						{% for bouquet in bouquets %}
+							<a href="{% url 'card_page' bouquet.id %}">
+								<div class="recommended__block">
+									<div class="recommended__block_elems ficb">
+										<span class="recommended__block_intro">{{ bouquet.name }}</span>
+										<span class="recommended__block_price">{{ bouquet.price }} руб</span>
+									</div>
+									<img src="{{ bouquet.image.url }}" alt="{{ bouquet.name }}" class="recommended__img">
+								</div>
+							</a>
+						{% endfor %}
+					</div>
+					<button class="btn largeBtn catalog__btn">Показать ещё</button>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section id="consultation">
+		<div class="container">
+			<div class="consultation">
+				<div class="title consultation__title">Оставьте заявку на консультацию</div>
+				<form action="#" class="consultation__form">
+					<input type="text" name="fname" class="consultation__form_input" placeholder="Введите Имя" required>
+					<input type="text" name="tel" class="consultation__form_input" placeholder="+ 7 (999) 000 00 00" required>
+					<button type="submit" class="consultation__form_btn">Отправить</button>
+				</form>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

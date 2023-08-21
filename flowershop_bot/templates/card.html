@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  card - Flower Shop
+{% endblock %}
+
+{% block content %}
+	<section id="card">
+		<div class="container">
+			<div class="card ficb">
+				<div class="card__block card__block_first">
+					<img src="{{ bouquet.image.url }}" alt="{{ bouquet.name }}" class="card__img">
+				</div>
+				<div class="card__block card__block_sec">
+					<div class="title">{{ bouquet.name }}</div>
+					<div class="card__block_price">{{ bouquet.price }} руб</div>
+					
+					<div class="card__elems ">
+						<span class="card__elems_intro">Состав</span>
+						<div class="card__items">
+							{% for composition in bouquet.compositions.all %}
+								<span class="card_items_intro">
+									{{ composition.item.name }} - {{ composition.quantity }} шт.
+									{% if composition.is_free %}(бесплатно){% endif %}
+								</span>
+							{% endfor %}
+						</div>
+					</div>
+					<div class="card__elems ">
+						<span class="card__elems_intro">Размер</span>
+						<div class="card__items">
+							<span class="card_items_intro">
+								Высота - {{ bouquet.height }} см
+							</span>
+							<span class="card_items_intro">
+								Ширина - {{ bouquet.width }} см
+							</span>
+						</div>
+					</div>
+					<button class="btn largeBtn card__btn">
+						<a href="{% url 'order' %}">Заказать букет</a>
+					</button>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section id="consultation">
+		<div class="container">
+			<div class="consultation">
+				<div class="title consultation__title">Оставьте заявку на консультацию</div>
+				<form action="{% url 'consultation_page' %}" class="consultation__form">
+					<input type="text" name="fname" class="consultation__form_input" placeholder="Введите Имя" required>
+					<input type="text" name="tel" class="consultation__form_input" placeholder="+ 7 (999) 000 00 00" required>
+					<button type="submit" class="consultation__form_btn">Отправить</button>
+				</form>
+			</div>
+		</div>
+	</section>
+{% endblock %}
