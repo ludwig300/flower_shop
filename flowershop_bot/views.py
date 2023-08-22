@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 
-from .models import Bouquet
+from .models import Bouquet, Quiz
 
 
 def index(request):
@@ -19,26 +19,15 @@ def quiz_view(request):
 
 
 def quiz_step_view(request, occasion):
+    request.session['occasion'] = occasion
     return render(request, 'quiz-step.html', {'occasion': occasion})
 
 
-def result_view(request, price):
-    if price == 'under-1000':
-        bouquets = Bouquet.objects.filter(price__lt=1000)
-    elif price == '1000-5000':
-        bouquets = Bouquet.objects.filter(price__gte=1000, price__lte=5000)
-    elif price == 'over-5000':
-        bouquets = Bouquet.objects.filter(price__gt=5000)
-    elif price == 'no-matter':
-        bouquets = Bouquet.objects.all()
-    else:
-        bouquets = []
-
-    context = {
-        'bouquets': bouquets,
-    }
-
-    return render(request, 'result.html', context)
+def result(request, price):
+    occasion = request.session.get('occasion', 'no_occasion')
+    quiz = Quiz.objects.filter(occasion=occasion, price_range=price).first()
+    bouquets = quiz.bouquets.all() if quiz else []
+    return render(request, 'result.html', {'bouquets': bouquets})
 
 
 def order_view(request):
@@ -63,5 +52,11 @@ def load_more_bouquets(request):
     offset = int(request.GET.get('offset', 3))
     limit = int(request.GET.get('limit', 3))
     bouquets = Bouquet.objects.all()[offset:offset + limit]
-    bouquet_list = list(bouquets.values('id', 'name', 'price')) # Можно добавить другие поля
+    bouquet_list = list(bouquets.values('id', 'name', 'price'))
     return JsonResponse(bouquet_list, safe=False)
+
+
+def quiz_step(request, occasion):
+    quiz = Quiz.objects.filter(occasion=occasion).first()
+    bouquets = quiz.bouquets.all() if quiz else []
+    return render(request, 'quiz_step.html', {'bouquets': bouquets})

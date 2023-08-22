@@ -23,7 +23,11 @@ class Bouquet(models.Model):
 
 
 class Composition(models.Model):
-    bouquet = models.ForeignKey(Bouquet, related_name='compositions', on_delete=models.CASCADE)
+    bouquet = models.ForeignKey(
+        Bouquet,
+        related_name='compositions',
+        on_delete=models.CASCADE
+    )
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     is_free = models.BooleanField(default=False)
@@ -39,3 +43,24 @@ class Order(models.Model):
 
     def __str__(self):
         return self.customer_name
+
+
+class Quiz(models.Model):
+    OCCASIONS = [
+        ('wedding', 'Свадьба'),
+        ('birthday', 'День рождения'),
+        ('no_occasion', 'Без повода')
+    ]
+    PRICE_RANGES = [
+        ('under-1000', 'До 1 000 руб'),
+        ('1000-5000', '1 000 - 5 000 руб'),
+        ('over-5000', 'от 5 000 руб'),
+        ('no-matter', 'Не имеет значения')
+    ]
+
+    occasion = models.CharField(max_length=20, choices=OCCASIONS)
+    price_range = models.CharField(max_length=20, choices=PRICE_RANGES)
+    bouquets = models.ManyToManyField(Bouquet, related_name='occasions')
+
+    def __str__(self):
+        return f"{self.get_occasion_display()} - {self.get_price_range_display()}"

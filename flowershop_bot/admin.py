@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Bouquet, Composition, Item, Order
+from .models import Bouquet, Composition, Item, Order, Quiz
 
 
 class CompositionInline(admin.TabularInline):
@@ -9,7 +9,7 @@ class CompositionInline(admin.TabularInline):
 
 
 class BouquetAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'height', 'width')
+    list_display = ('name', 'price', 'height', 'width', 'occasions')
     search_fields = ['name']
     inlines = [CompositionInline]
 
@@ -27,6 +27,12 @@ class OrderAdmin(admin.ModelAdmin):
     search_fields = ['customer_name', 'customer_phone']
 
 
+class QuizAdmin(admin.ModelAdmin):
+    list_display = ('occasion', 'price_range')
+    filter_horizontal = ('bouquets',)
+
+
+admin.site.register(Quiz, QuizAdmin)
 admin.site.register(Bouquet, BouquetAdmin)
 admin.site.register(Composition, CompositionAdmin)
 admin.site.register(Order, OrderAdmin)
