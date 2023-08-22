@@ -16,9 +16,9 @@
 				<a href="/"><img src='{% static "img/logo.svg" %}' alt="logo" class="logo"></a>
 				<nav>
 					<ul class="menu ficc">
-						<li class="menu__item"><a href="/catalog" class="menu__item_link">Каталог</a></li>
-						<li class="menu__item"><a href="#" class="menu__item_link">Рекомендации</a></li>
-						<li class="menu__item"><a href="#" class="menu__item_link">Контакты</a></li>
+						<li class="menu__item"><a href="{% url 'catalog' %}" class="menu__item_link">Каталог</a></li>
+						<li class="menu__item"><a href="{% url 'quiz_page' %}" class="menu__item_link">Рекомендации</a></li>
+						<li class="menu__item"><a href="#" id="contactLink" class="menu__item_link">Контакты</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -31,9 +31,9 @@
 				<a href="/"><img src='{% static "img/logo.svg" %}' alt="logo" class="logo footer__logo"></a>
 				<nav>
 					<ul class="menu footer__menu ficc">
-						<li class="menu__item"><a href="/catalog" class="menu__item_link">Каталог</a></li>
-						<li class="menu__item"><a href="#" class="menu__item_link">Рекомендации</a></li>
-						<li class="menu__item"><a href="#" class="menu__item_link">Контакты</a></li>
+						<li class="menu__item"><a href="{% url 'catalog' %}" class="menu__item_link">Каталог</a></li>
+						<li class="menu__item"><a href="{% url 'quiz_page' %}" class="menu__item_link">Рекомендации</a></li>
+						<li class="menu__item"><a href="#" id="contactLink" class="menu__item_link">Контакты</a></li>
 					</ul>
 				</nav>
 				<hr class="line"></hr>
@@ -42,6 +42,19 @@
 			</div>
 		</div>
 	</footer>
-	{% block scripts %}{% endblock %}
+	{% block scripts %}
+	<script>
+		document.getElementById('contactLink').addEventListener('click', function(event) {
+			event.preventDefault();
+			var contactsSection = document.getElementById('contacts');
+			if (contactsSection) {
+				contactsSection.scrollIntoView({ behavior: 'smooth' });
+			} 
+			else {
+				window.location.href = "/#contacts";
+			}
+		});
+	</script>
+	{% endblock %}
 </body>
 </html>
