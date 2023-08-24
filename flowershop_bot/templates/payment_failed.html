@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  Ошибка оплаты - Flower Shop
+{% endblock %}
+
+{% block content %}
+    <script>
+        .btn-try-again, .btn-support {
+            background-color: #f44336; /* Красный */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+          }
+          
+          .btn-try-again:hover {
+            background-color: #d32f2f;
+          }
+          
+          .btn-support {
+            background-color: #2196F3; /* Синий */
+          }
+          
+          .btn-support:hover {
+            background-color: #1976D2;
+          }
+    </script>
+	<section id="paymentFailed">
+		<div class="container">
+			<div class="payment-failed">
+				<h1>Оплата не прошла!</h1>
+				<p>К сожалению, произошла ошибка при обработке вашей оплаты. Пожалуйста, попробуйте ещё раз или свяжитесь с нашей службой поддержки.</p>
+                <a href="{% url 'order' %}" class="btn btn-try-again">Попробовать ещё раз</a>
+                <a href="{% url 'contact' %}" class="btn btn-support">Связаться с поддержкой</a>
+			</div>
+		</div>
+		<img src='{% static "img/failedImg.jpg" %}' alt="failedImage" class="payment-failed__img">
+	</section>
+    {% block scripts %}
+	<script>
+		document.getElementById('contactLink').addEventListener('click', function(event) {
+			event.preventDefault();
+			var contactsSection = document.getElementById('contacts');
+			if (contactsSection) {
+				contactsSection.scrollIntoView({ behavior: 'smooth' });
+			} 
+			else {
+				window.location.href = "/#contacts";
+			}
+		});
+	</script>
+	{% endblock %}
+{% endblock %}

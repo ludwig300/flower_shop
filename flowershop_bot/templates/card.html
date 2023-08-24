@@ -37,9 +37,11 @@
 							</span>
 						</div>
 					</div>
-					<button class="btn largeBtn card__btn">
-						<a href="{% url 'order' %}">Заказать букет</a>
-					</button>
+					<form action="{% url 'order' bouquet.id %}" method="post">
+						{% csrf_token %}
+						<input type="hidden" name="bouquet_id" value="{{ bouquet.id }}">
+						<button type="submit" class="btn largeBtn card__btn">Заказать букет</button>
+					</form>
 				</div>
 			</div>
 		</div>

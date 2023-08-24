@@ -23,7 +23,7 @@ class CompositionAdmin(admin.ModelAdmin):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('customer_name', 'customer_phone', 'bouquet')
+    list_display = ('pk', 'customer_name', 'customer_phone', 'bouquet')
     search_fields = ['customer_name', 'customer_phone']
 
 

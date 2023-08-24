@@ -11,8 +11,9 @@
 				<div class="order__block">
 					<div class="order_items">
 						<div class="title">Оформление доставки</div>
-						<form action="{% url 'order_step' %}" method="post" class="order__form">
+						<form action="{% url 'order_step' bouquet.id %}" method="post" class="order__form">
 							{% csrf_token %}
+							<input type="hidden" name="bouquet_id" value="{{ bouquet_id }}">
 							<div class="order__form_block ficb">
 								<input type="text" name="fname" class="order__form_input" placeholder="Введите Имя" required>
 								<input type="text" name="tel" class="order__form_input" placeholder="+ 7 (999) 000 00 00" required>
@@ -43,11 +44,11 @@
 									<input type="radio" name="orderTime" id="radio6" value="с 18:00 до 20:00" class="order__form_radio" />
 									<label for="radio6" class="radioLable">с 18:00 до 20:00</label>
 								</div>
-								
 							</div>
 							<div class="order__form_line"></div>
 							<div class="order__form_btns ficb">
-								<input type="submit" value="Оплатить" class="btn order__form_pay">
+								<input type="submit" value="Оформить заказ" class="btn order__form_pay">
+								
 								<button onclick="window.history.back();" class="btn order__form_btn">Назад</button>
 							</div>
 						</form>

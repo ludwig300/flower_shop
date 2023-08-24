@@ -40,6 +40,9 @@ class Order(models.Model):
     customer_name = models.CharField(max_length=200)
     customer_phone = models.CharField(max_length=20)
     bouquet = models.ForeignKey(Bouquet, on_delete=models.CASCADE)
+    payment_id = models.CharField(max_length=36, blank=True, null=True)
+    delivery_address = models.CharField(max_length=255, blank=True, null=True)
+    delivery_time = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return self.customer_name
