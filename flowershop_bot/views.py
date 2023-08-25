@@ -1,3 +1,4 @@
+import logging
 import os
 
 from django.http import HttpResponse, JsonResponse
@@ -9,6 +10,8 @@ from yookassa import Configuration
 from .models import Bouquet, Order, Quiz
 from .payments import create_payment, get_payment_status
 
+logger = logging.getLogger(__name__)
+
 load_dotenv()
 
 Configuration.shop_id = os.getenv('YOOKASSA_SHOP_ID')
@@ -16,6 +19,7 @@ Configuration.secret_key = os.getenv('YOOKASSA_SECRET_KEY')
 
 
 def payment_confirmation(request, pk):
+    logger.info('Payment confirmation started for order id %s', pk)
     order = Order.objects.get(id=pk)
     status = get_payment_status(order.payment_id)
 
@@ -23,9 +27,11 @@ def payment_confirmation(request, pk):
         order = Order.objects.get(payment_id=order.payment_id)
         order.is_paid = True
         order.save()
+        logger.info('Payment succeeded for order id %s', pk)
         context = {'pk': pk}
         return render(request, 'payment_success.html', context)
     else:
+        logger.warning('Payment failed for order id %s', pk)
         return render(request, 'payment_failed.html')
 
 
@@ -109,6 +115,7 @@ def order_step(request, bouquet_id):
             delivery_time=delivery_time,
             bouquet=bouquet
         )
+        logger.info('Order created with id %s', order.id)
         description = f"Описание заказа №{order.id}"
         amount = bouquet.price
         return_url = request.build_absolute_uri(reverse('payment_confirmation', kwargs={'pk': order.pk}))
@@ -116,6 +123,7 @@ def order_step(request, bouquet_id):
         payment = create_payment(order.id, amount, description, return_url)
         order.payment_id = payment.id
         order.save()
+        logger.info('Payment initiated with payment id %s', payment.id)
 
         return redirect(payment.confirmation.confirmation_url)
     else:

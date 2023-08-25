@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 
 from flowershop_bot import views
 
@@ -20,7 +20,10 @@ urlpatterns = [
     path('consultation/', views.consultation_page, name='consultation_page'),
     path('card/<int:bouquet_id>/', views.card_page, name='card_page'),
     path('load_more_bouquets/', views.load_more_bouquets, name='load_more_bouquets'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path(r'__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

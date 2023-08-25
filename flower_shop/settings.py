@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'flowershop_bot',
+    'debug_toolbar'
 ]
 
 MIDDLEWARE = [
@@ -63,9 +64,10 @@ WSGI_APPLICATION = 'flower_shop.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    'default': env.dj_db_url('DB_URL', default='postgres://localhost'),
+    'TEST': {
+        'CHARSET': 'utf8',
+        'COLLATION': 'utf8_general_ci',
     }
 }
 
@@ -105,8 +107,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'flowershop_bot/static'),]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'flowershop_bot', 'static')]
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
@@ -118,3 +120,27 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # YOOKASSA
 YOOKASSA_SHOP_ID = env('YOOKASSA_SHOP_ID', '246864')
 YOOKASSA_SECRET_KEY = env('YOOKASSA_SECRET_KEY', 'test_w9nmjNiI38927r_jZFns_5W1JS_JgFtFMLLVErHDEIA')
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': 'debug.log',
+            'maxBytes': 1024 * 1024 * 5,
+            'backupCount': 5,
+        },
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
