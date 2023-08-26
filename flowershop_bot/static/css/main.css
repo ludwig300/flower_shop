@@ -758,7 +758,6 @@ opacity: 0.3;
 }
 
 @media screen and (max-width: 768px) {
-	/* ваш код для мобильной версии */
 	.order__block, .payment-success, .payment-failed {
 	  width: 100%;
 	  padding: 20px;
@@ -783,15 +782,15 @@ opacity: 0.3;
 		position: relative;
 		z-index: 2;
 		font-family: 'Unbounded', sans-serif;
-		max-width: 100%;  /* или другое значение, подходящее для мобильных устройств */
-		font-size: 2.5rem;  /* уменьшаем размер шрифта */
-		margin-bottom: 1.25rem;  /* уменьшаем отступ */
+		max-width: 100%;
+		font-size: 2.5rem;
+		margin-bottom: 1.25rem;
 	}
 
 	.banner__text {
-		max-width: 100%;  /* или другое значение */
-		font-size: 0.875rem;  /* уменьшаем размер шрифта */
-		margin-bottom: 1.25rem;  /* уменьшаем отступ */
+		max-width: 100%;
+		font-size: 0.875rem;
+		margin-bottom: 1.25rem;
 		position: relative;
 		z-index: 2;
 		background-color: rgba(255, 255, 255, 0.5);
@@ -801,32 +800,31 @@ opacity: 0.3;
 	.banner__img {
 		left: 50%;
 		margin: auto;
-		max-width: 40%;  /* адаптируем размер */
+		max-width: 40%;
 		bottom: 0;
-		position: absolute; /* или relative */
+		position: absolute;
 		z-index: 1;
 	}
 
 	.banner__btn {
-		width: auto;  /* позволим кнопке растягиваться */
+		width: auto;
 		height: auto;
-		/* padding: 10px 20px;  задаем отступы */
 	}
 
 	.recommended__block {
-        flex-basis: 100%;  /* занимает всю ширину на мобильных */
-        width: auto;  /* автоматически подстраивается */
-        height: auto;  /* автоматическая высота */
-        margin-right: 0;  /* убираем отступ справа */
-    }
+        flex-basis: 100%;
+        width: auto;
+        height: auto;
+        margin-right: 0;
+	}
     .recommended__block_elems {
-        padding: 10px;  /* уменьшаем отступы */
-        background-color: rgba(255, 255, 255, 0.7);  /* делаем фон чуть менее прозрачным */
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.7);
     }
     .recommended__btn {
-        width: auto;  /* позволим кнопке растягиваться */
-        height: auto;  /* автоматическая высота */
-        margin-top: 1.25rem;  /* уменьшаем отступ сверху */
+        width: auto;
+        height: auto;
+        margin-top: 1.25rem;
     }
 
 	.contacts {
@@ -848,59 +846,54 @@ opacity: 0.3;
         padding-bottom: 20px;
     }
     .consultation__title {
-        font-size: 1.5rem;  /* уменьшение размера шрифта */
+        font-size: 1.5rem;
         margin-bottom: 0.625rem;
     }
     .consultation__form {
-        width: 100%;  /* делаем форму на всю ширину экрана */
-        padding-left: 2%;  /* небольшие отступы, чтобы контент не прилипал к краям */
+        width: 100%;
+        padding-left: 2%;
         padding-right: 2%;
     }
     .consultation__form_input, .consultation__form_btn {
-        width: 100%;  /* элементы формы теперь тоже на всю ширину */
-        margin-bottom: 10px;  /* отступы между элементами */
-        margin-right: 0;  /* убираем правый отступ, который был в десктопной версии */
+        width: 100%;
+        margin-bottom: 10px;
+        margin-right: 0;
     }
 
 	.quiz__back {
-		padding-top: 100px; /* уменьшаем верхний padding */
+		padding-top: 100px;
 	}
 
-	/* Стили для quiz__title */
 	.quiz__title {
-		font-size: 1.75em; /* уменьшаем размер шрифта */
+		font-size: 1.75em;
 		margin-top: 0.625em;
 		margin-bottom: 1.25em;
 		margin-left: 0.625em;
 	}
 
-	/* Стили для quiz__elem */
 	.quiz__elem {
-		font-size: 14px; /* уменьшаем размер шрифта */
-		padding: 15px 20px; /* уменьшаем padding */
-		margin-right: 5px; /* уменьшаем правый margin */
+		font-size: 14px;
+		padding: 15px 20px;
+		margin-right: 5px;
 		border-radius: 100px;
 		width: 14em;
 	}
 
-	/* Стили для quiz__progress */
 	.quiz__progress {
-		margin-top: 30px; /* уменьшаем верхний margin */
+		margin-top: 30px;
 	}
 
-	/* Стили для quiz__progress_num и quiz__progress_in */
 	.quiz__progress_num, .quiz__progress_in {
-		font-size: 12px; /* уменьшаем размер шрифта */
+		font-size: 12px;
 	}
 
-	/* Стили для quiz__progress_step */
+	
 	.quiz__progress_step {
-		margin-bottom: 5px; /* уменьшаем нижний margin */
+		margin-bottom: 5px;
 	}
 
-	/* Стили для quiz__progress_line и quiz__progress_lineActive */
-	.quiz__progress_line, .quiz__progress_lineActive {
-		height: 5px; /* уменьшаем высоту */
+		.quiz__progress_line, .quiz__progress_lineActive {
+		height: 5px;
 	}
 
 	.fic {
@@ -927,5 +920,90 @@ opacity: 0.3;
 		color: #17CF97;
 		margin-bottom: 30px;
 		margin-left: 0.625em;
+	}
+	.card {
+		padding-top: 20px;
+		padding-bottom: 50px;	
+	}
+	.card__block_first, .card__block_sec {
+		width: 100%;
+		box-sizing: border-box;
+		padding: 0 15px;
+	}
+	.card__img {
+		width: 100%;
+		height: auto;
+	}
+	.card__block_price {
+		font-size: 28px;
+		margin-bottom: 20px;
+	}
+	.card__elems {
+		display: block;
+		margin-bottom: 20px;
+	}
+	.card__elems_intro {
+		font-size: 12px;
+		margin-right: 0;
+		margin-bottom: 10px;
+	}
+	.card_items_intro {
+		font-size: 12px;
+		line-height: 145.02%;
+		color: #ABABAB;
+	}
+	.card__btn {
+		background: #17CF97;
+		color: #FFFFFF;
+		margin-top: 30px;
+		width: 100%;
+	}
+	#order {
+		position: relative;
+	}
+	.order__block {
+		height: auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.order_items {
+		width: 100%;
+		margin-top: 30px;
+		margin-right: 0;
+	}
+	.order__form_block {
+		margin-bottom: 20px;
+	}
+	.order__form_input, .order__form_pay, .order__form_btn {
+		width: 100%;
+		margin-bottom: 10px;
+	}
+	.order__form_radioBlock {
+		margin-right: 0;
+		margin-bottom: 5px;
+	}
+	.order__form_line {
+		margin-top: 20px;
+		margin-bottom: 20px;
+	}
+	.order__form_intro {
+		font-size: 12px;
+		margin-bottom: 5px;
+	}
+	.orderStep_form .order__form_block {
+		flex-direction: column;
+	}
+	.orderStep_form_input, .order__form_item .orderStep_form_input {
+		width: 100%;
+		margin-bottom: 10px;
+		margin-right: 0;
+	}
+	.order__img {
+		position: static;
+		width: 100%;
+		height: auto;
+		top: auto;
+		right: auto;
 	}
 }
